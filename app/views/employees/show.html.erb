@@ -1,5 +1,5 @@
-<h1>Name: <%= @employee["name"] %></h1>
-<h2>Birthday: <%= @employee["birthday"] %></h2>
-<h2>Email: <%= @employee["email"] %></h2>
+<h1>Name: <%= @employee.full_name %></h1>
+<h2>Birthday: <%= @employee.birthdate %></h2>
+<h2>Email: <%= @employee.email %></h2>
 
-<%= button_to "Delete", @employee, :method => :delete %>
+ <%= button_to "Delete", :method => :delete %>

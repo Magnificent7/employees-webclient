@@ -5,7 +5,7 @@ class EmployeesController < ApplicationController
   end
 
   def show
-    @employee = Unirest.get("http://localhost:3000/api/v2/employees/#{params[:id]}.json").body
+    @employee = Employee.new(Unirest.get("http://localhost:3000/api/v2/employees/#{params[:id]}.json").body)
   end
 
   def new
