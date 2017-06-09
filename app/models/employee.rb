@@ -16,7 +16,22 @@ class Employee
   end
 
   def friendly_birthday
-    Date.new(@birthdate).strftime("%m/%d/%Y")
+    Date.parse(@birthdate).strftime("%m/%d/%Y")
   end
+
+  def self.find(id)
+    employee_hash = Unirest.get("http://localhost:3000/api/v2/employees/#{id}.json").body
+    Employee.new(employee_hash)
+  end
+
+  def self.all
+    @employees = []
+    api_employees = Unirest.get("http://localhost:3000/api/v2/employees.json").body
+    api_employees.each do |api_employee|
+      @employees << Employee.new(api_employee)
+    end
+    @employees
+  end
+
 
 end
