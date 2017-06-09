@@ -2,4 +2,4 @@
 <h2>Birthday: <%= @employee.friendly_birthday %></h2>
 <h2>Email: <%= @employee.email %></h2>
 
- <%= button_to "Delete", :method => :delete %>
+ <%= button_to "Delete", "/employees/#{@employee.id}", :method => :delete %>

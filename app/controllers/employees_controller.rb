@@ -26,7 +26,8 @@ class EmployeesController < ApplicationController
   end
 
   def destroy
-    employee = Unirest.delete("http://localhost:3000/api/v2/employees/#{params[:id]}.json")
+    employee = Employee.find(params[:id])
+    employee.destroy
     redirect_to employees_path
   end
 
