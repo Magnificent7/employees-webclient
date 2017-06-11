@@ -20,13 +20,13 @@ class Employee
   end
 
   def self.find(id)
-    employee_hash = Unirest.get("http://localhost:3000/api/v2/employees/#{id}.json").body
+    employee_hash = Unirest.get("#{ENV['API_ROOT_URL']}/employees/#{id}.json").body
     Employee.new(employee_hash)
   end
 
   def self.all
     @employees = []
-    api_employees = Unirest.get("http://localhost:3000/api/v2/employees.json").body
+    api_employees = Unirest.get("#{ENV['API_ROOT_URL']}/employees.json", :headers => {"X-User-Email" => ENV['API_EMAIL'], "Authorization" => "Token token=#{ENV['API_KEY']}"}).body
     api_employees.each do |api_employee|
       @employees << Employee.new(api_employee)
     end
@@ -34,7 +34,7 @@ class Employee
   end
 
   def destroy
-    Unirest.delete("http://localhost:3000/api/v2/employees/#{id}.json", headers: {"Accept" => "application/json"})
+    Unirest.delete("#{ENV['API_ROOT_URL']}/employees/#{id}.json", headers: {"Accept" => "application/json"})
   end
 
 
